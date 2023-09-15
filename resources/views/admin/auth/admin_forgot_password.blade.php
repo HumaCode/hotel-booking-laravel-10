@@ -55,8 +55,12 @@
                                         @csrf
                                         <div class="my-4">
                                             <label class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control"
-                                                placeholder="Enter Email" />
+                                            <input type="email" name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                placeholder="Enter your email" value="{{ old('email') }}" />
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="d-grid gap-2">
                                             <button type="submit" class="btn btn-primary">Send</button>

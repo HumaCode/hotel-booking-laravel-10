@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
+Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
+Route::get('/admin/forgot-password', [AdminController::class, 'adminForgotPass'])->name('admin.forgot_pass');
+
 
 // middleware
 Route::middleware(['auth', 'roles:admin'])->group(function () {

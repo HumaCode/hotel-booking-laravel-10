@@ -19,46 +19,7 @@
                         <a class="nav-link" href="avascript:;"><i class='bx bx-search'></i>
                         </a>
                     </li>
-                    <li class="nav-item dropdown dropdown-laungauge d-none d-sm-flex">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="avascript:;"
-                            data-bs-toggle="dropdown"><img src="{{ asset('backend') }}/assets/images/county/02.png"
-                                width="22" alt="">
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="{{ asset('backend') }}/assets/images/county/01.png" width="20"
-                                        alt=""><span class="ms-2">English</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="{{ asset('backend') }}/assets/images/county/02.png" width="20"
-                                        alt=""><span class="ms-2">Catalan</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="{{ asset('backend') }}/assets/images/county/03.png" width="20"
-                                        alt=""><span class="ms-2">French</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="{{ asset('backend') }}/assets/images/county/04.png" width="20"
-                                        alt=""><span class="ms-2">Belize</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="{{ asset('backend') }}/assets/images/county/05.png" width="20"
-                                        alt=""><span class="ms-2">Colombia</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="{{ asset('backend') }}/assets/images/county/06.png" width="20"
-                                        alt=""><span class="ms-2">Spanish</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="{{ asset('backend') }}/assets/images/county/07.png" width="20"
-                                        alt=""><span class="ms-2">Georgian</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="{{ asset('backend') }}/assets/images/county/08.png" width="20"
-                                        alt=""><span class="ms-2">Hindi</span></a>
-                            </li>
-                        </ul>
-                    </li>
+
                     <li class="nav-item dark-mode d-none d-sm-flex">
                         <a class="nav-link dark-mode-icon" href="javascript:;"><i class='bx bx-moon'></i>
                         </a>

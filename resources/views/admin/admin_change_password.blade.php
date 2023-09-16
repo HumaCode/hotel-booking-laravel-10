@@ -1,21 +1,16 @@
 @extends('admin.admin_dashboard')
 
-@push('styles')
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-@endpush
-
 @section('admin')
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">User Profile</div>
+            <div class="breadcrumb-title pe-3">Change Password</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                        <li class="breadcrumb-item active" aria-current="page">Change Password</li>
                     </ol>
                 </nav>
             </div>
@@ -82,86 +77,53 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <form action="{{ route('admin.profile.store') }}" method="POST"
+                                <form action="{{ route('admin.password.update') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Name</h6>
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Old Password</h6>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                name="name" value="{{ $profileData->name }}" />
-                                            @error('name')
+                                        <div class="col-sm-8 text-secondary">
+                                            <input type="password"
+                                                class="form-control @error('old_password') is-invalid @enderror"
+                                                name="old_password" id="old_password" />
+                                            @error('old_password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Email</h6>
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">New Password</h6>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="email"
-                                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                                value="{{ $profileData->email }}" />
-                                            @error('email')
+                                        <div class="col-sm-8 text-secondary">
+                                            <input type="password"
+                                                class="form-control @error('new_password') is-invalid @enderror"
+                                                name="new_password" id="new_password" />
+                                            @error('new_password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Phone</h6>
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Confirm New Password</h6>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text"
-                                                class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                                value="{{ $profileData->phone }}" />
-                                            @error('phone')
+                                        <div class="col-sm-8 text-secondary">
+                                            <input type="password"
+                                                class="form-control @error('confirm_new_password') is-invalid @enderror"
+                                                name="new_password_confirmation" id="confirm_new_password" />
+                                            @error('confirm_new_password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text"
-                                                class="form-control @error('address') is-invalid @enderror" name="address"
-                                                value="{{ $profileData->address }}" />
-                                            @error('address')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Photo</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input class="form-control @error('photo') is-invalid @enderror"
-                                                type="file" name="photo" id="image">
-                                            @error('photo')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Preview</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <img src="{{ !empty($profileData->photo) ? url('uploads/admin_images/' . $profileData->photo) : asset('uploads/noimage.jpg') }}"
-                                                alt="Admin" class="rounded-circle p-1 bg-primary" width="110"
-                                                id="showImage">
-                                        </div>
-                                    </div>
+
                                     <div class="row">
-                                        <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-8 text-secondary">
                                             <input type="submit" class="btn btn-primary px-4" value="Save Changes" />
                                         </div>
                                     </div>
@@ -176,18 +138,3 @@
         </div>
     </div>
 @endsection
-
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#image').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0'])
-            });
-        });
-    </script>
-@endpush

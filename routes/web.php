@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -50,4 +51,13 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
     Route::post('/admin/profile/store', [AdminController::class, 'adminProfileStore'])->name('admin.profile.store');
     Route::get('/admin/change-password', [AdminController::class, 'adminChangePassword'])->name('admin.change.password');
     Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
+});
+
+Route::middleware(['auth', 'roles:admin'])->group(function () {
+
+    // team
+    Route::controller(TeamController::class)->group(function () {
+
+        Route::get('/all/team', 'allTeam')->name('all.team');
+    });
 });

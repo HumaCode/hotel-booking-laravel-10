@@ -12,11 +12,24 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="javascript:;">
+            <a href="{{ route('admin.dashboard') }}">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Manage Teams</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('all.team') }}"><i class='bx bx-radio-circle'></i>All Team</a>
+                </li>
+                <li> <a href="app-chat-box.html"><i class='bx bx-radio-circle'></i>Add Team</a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">

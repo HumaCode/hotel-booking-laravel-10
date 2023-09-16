@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -31,6 +32,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $id = Auth::user()->id;
+        $data = User::findOrFail($id);
+
+        $username = $data->name;
+
         $url = '';
         if ($request->user()->role === 'admin') {
             $url = '/admin/dashboard';
@@ -39,8 +45,8 @@ class AuthenticatedSessionController extends Controller
         }
 
         $notification = [
-            'message'       => 'Login is successfully',
-            'alert-type'    => 'success'
+            'message'       => 'User ' . $username . ' Login Successfully.',
+            'alert-type'    => 'info'
         ];
 
         // return redirect()->intended(RouteServiceProvider::HOME);

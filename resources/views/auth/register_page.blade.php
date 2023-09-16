@@ -29,26 +29,49 @@
                                 <span class="sp-color">Sign Up</span>
                                 <h2>Create an Account!</h2>
                             </div>
-                            <form id="contactForm">
+                            <form method="POST" action="{{ route('register') }}">
+                                @csrf
+
                                 <div class="row">
                                     <div class="col-lg-12 ">
                                         <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control"
-                                                required data-error="Please enter your Username" placeholder="Username">
+                                            <input type="text" name="name" id="name"
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                placeholder="Enter your name" value="{{ old('name') }}">
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="email" name="email" id="email" class="form-control"
-                                                required data-error="Please enter email" placeholder="Email">
+                                            <input type="email" name="email" id="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                placeholder="Enter your email" value="{{ old('email') }}">
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input class="form-control" type="password" name="password"
-                                                placeholder="Password">
+                                            <input class="form-control @error('password') is-invalid @enderror"
+                                                type="password" name="password" placeholder="Password">
+                                            @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                type="password" name="password_confirmation" placeholder="Confirm Password">
+                                            @error('password_confirmation')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
 

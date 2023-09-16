@@ -45,7 +45,7 @@
 
                             @foreach ($teams as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}.</td>
                                     <td>
                                         <img src="{{ !empty($item->image) ? url($item->image) : asset('uploads/noimage.jpg') }}"
                                             alt="Team Image" class="p-1 bg-primary" width="70" height="40">
@@ -56,7 +56,8 @@
                                     <td class="text-center">{{ $item->instagram ?? '-' }}</td>
                                     <td class="text-center">{{ $item->twitter ?? '-' }}</td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-outline-warning px-3 radius-30">Edit</a> &nbsp;
+                                        <a href="{{ route('edit.team', $item->id) }}"
+                                            class="btn btn-outline-warning px-3 radius-30">Edit</a> &nbsp;
                                         <a href="#" class="btn btn-outline-danger px-3 radius-30">Delete</a>
                                     </td>
                                 </tr>

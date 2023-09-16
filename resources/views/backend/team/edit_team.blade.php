@@ -10,13 +10,13 @@
 
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Add Team</div>
+            <div class="breadcrumb-title pe-3">Edit Team</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Team</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Team</li>
                     </ol>
                 </nav>
             </div>
@@ -28,8 +28,10 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('team.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
+                    <input type="hidden" name="id" value="{{ $team->id }}">
 
                     <div class="row mb-3">
                         <div class="col-sm-2">
@@ -37,7 +39,7 @@
                         </div>
                         <div class="col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                value="{{ old('name') }}" />
+                                value="{{ old('name', $team->name) }}" />
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -49,7 +51,7 @@
                         </div>
                         <div class="col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('position') is-invalid @enderror"
-                                name="position" value="{{ old('position') }}" />
+                                name="position" value="{{ old('position', $team->position) }}" />
                             @error('position')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -61,7 +63,7 @@
                         </div>
                         <div class="col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('facebook') is-invalid @enderror"
-                                name="facebook" value="{{ old('facebook') }}" />
+                                name="facebook" value="{{ old('facebook', $team->facebook) }}" />
                             @error('facebook')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -73,7 +75,7 @@
                         </div>
                         <div class="col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('instagram') is-invalid @enderror"
-                                name="instagram" value="{{ old('instagram') }}" />
+                                name="instagram" value="{{ old('instagram', $team->instagram) }}" />
                             @error('instagram')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -85,7 +87,7 @@
                         </div>
                         <div class="col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('twitter') is-invalid @enderror" name="twitter"
-                                value="{{ old('twitter') }}" />
+                                value="{{ old('twitter', $team->twitter) }}" />
                             @error('twitter')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -108,16 +110,16 @@
                             <h6 class="mb-0">Preview</h6>
                         </div>
                         <div class="col-sm-10 text-secondary">
-                            <img src="{{ asset('uploads/noimage.jpg') }}" alt="Admin"
-                                class="rounded-circle p-1 bg-primary" width="110" id="showImage">
-                            {{-- <img src="{{ !empty($profileData->photo) ? url('uploads/admin_images/' . $profileData->photo) : asset('uploads/noimage.jpg') }}"
-                                alt="Admin" class="rounded-circle p-1 bg-primary" width="110" id="showImage"> --}}
+                            {{-- <img src="{{ asset('uploads/noimage.jpg') }}" alt="Admin"
+                                class="rounded-circle p-1 bg-primary" width="110" id="showImage"> --}}
+                            <img src="{{ !empty($team->image) ? url($team->image) : asset('uploads/noimage.jpg') }}"
+                                alt="Team image" class="rounded-circle p-1 bg-primary" width="110" id="showImage">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-2"></div>
                         <div class="col-sm-10 text-secondary">
-                            <input type="submit" class="btn btn-primary px-4" value="Add Team" />
+                            <input type="submit" class="btn btn-primary px-4" value="Update Team" />
                         </div>
                     </div>
 

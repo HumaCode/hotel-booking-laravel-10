@@ -18,7 +18,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="#" class="btn btn-outline-primary px-5 radius-30">Add Team</a>
+                    <a href="{{ route('add.team') }}" class="btn btn-outline-primary px-5 radius-30">Add Team</a>
                 </div>
             </div>
         </div>
@@ -29,33 +29,40 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
+                                <th>S1</th>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Facebook</th>
+                                <th>Instagram</th>
+                                <th>Twitter</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011/07/25</td>
-                                <td>$170,750</td>
-                            </tr>
+
+                            @foreach ($teams as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ !empty($item->image) ? url($item->image) : asset('uploads/noimage.jpg') }}"
+                                            alt="Team Image" class="p-1 bg-primary" width="70" height="40">
+                                    </td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->position }}</td>
+                                    <td class="text-center">{{ $item->facebook ?? '-' }}</td>
+                                    <td class="text-center">{{ $item->instagram ?? '-' }}</td>
+                                    <td class="text-center">{{ $item->twitter ?? '-' }}</td>
+                                    <td class="text-center">
+                                        <a href="#" class="btn btn-outline-warning px-3 radius-30">Edit</a> &nbsp;
+                                        <a href="#" class="btn btn-outline-danger px-3 radius-30">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+
                         </tbody>
                     </table>
                 </div>

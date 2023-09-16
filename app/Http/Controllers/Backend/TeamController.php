@@ -85,11 +85,12 @@ class TeamController extends Controller
             $data->image = $save_url;
         }
 
-        $data->name     = $validated['name'];
-        $data->position = $validated['position'];
-        $data->facebook = $request->facebook;
-        $data->instagram = $request->instagram;
-        $data->twitter = $request->twitter;
+        $data->name         = $validated['name'];
+        $data->position     = $validated['position'];
+        $data->facebook     = $request->facebook;
+        $data->instagram    = $request->instagram;
+        $data->twitter      = $request->twitter;
+        $data->updated_at   = Carbon::now();
 
         $data->save();
 

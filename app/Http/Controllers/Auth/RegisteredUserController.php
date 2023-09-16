@@ -20,7 +20,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register_page');
+        $title = 'Register Page';
+
+        return view('auth.register_page', compact('title'));
     }
 
     /**

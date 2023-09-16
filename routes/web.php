@@ -22,9 +22,11 @@ Route::get('/dashboard', function () {
     return view('frontend.dashboard.user_dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'roles:user'])->group(function () {
+Route::middleware('auth')->group(function () {
+    // profile user
     Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
     Route::post('/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');
+    Route::get('/logout', [UserController::class, 'userLogout'])->name('user.logout');
 });
 
 require __DIR__ . '/auth.php';

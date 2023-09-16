@@ -15,8 +15,14 @@ class AdminRole
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if ($request->user()->role !== $role) {
-            return redirect('dashboard');
+        if ($request->user()->role != $role) {
+
+            $notification = [
+                'message'       => 'You are not an admin',
+                'alert-type'    => 'error'
+            ];
+
+            return redirect('dashboard')->with($notification);
         }
 
 

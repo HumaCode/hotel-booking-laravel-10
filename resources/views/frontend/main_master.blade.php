@@ -35,7 +35,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('frontend') }}/assets/img/favicon.png">
 
-    <title>Atoli - Hotel & Resorts HTML Template</title>
+    <title>{{ config('app.name') }}</title>
 
     {{-- toaster --}}
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">

@@ -59,7 +59,7 @@
                                         <a href="{{ route('edit.team', $item->id) }}"
                                             class="btn btn-outline-warning px-3 radius-30">Edit</a> &nbsp;
                                         <a href="{{ route('delete.team', $item->id) }}"
-                                            class="btn btn-outline-danger px-3 radius-30">Delete</a>
+                                            class="btn btn-outline-danger px-3 radius-30" id="delete">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

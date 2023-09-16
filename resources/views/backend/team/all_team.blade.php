@@ -58,7 +58,8 @@
                                     <td class="text-center">
                                         <a href="{{ route('edit.team', $item->id) }}"
                                             class="btn btn-outline-warning px-3 radius-30">Edit</a> &nbsp;
-                                        <a href="#" class="btn btn-outline-danger px-3 radius-30">Delete</a>
+                                        <a href="{{ route('delete.team', $item->id) }}"
+                                            class="btn btn-outline-danger px-3 radius-30">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

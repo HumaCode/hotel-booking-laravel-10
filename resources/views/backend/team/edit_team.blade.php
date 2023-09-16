@@ -28,7 +28,7 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="{{ route('team.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('team.update') }}" method="POST" enctype="multipart/form-data" id="myForm">
                     @csrf
 
                     <input type="hidden" name="id" value="{{ $team->id }}">
@@ -37,60 +37,50 @@
                         <div class="col-sm-2">
                             <h6 class="mb-0">Name</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                        <div class="form-group col-sm-10 text-secondary">
+                            <input type="text" class="form-control" name="name"
                                 value="{{ old('name', $team->name) }}" />
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-2">
                             <h6 class="mb-0">Position</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
-                            <input type="text" class="form-control @error('position') is-invalid @enderror"
-                                name="position" value="{{ old('position', $team->position) }}" />
-                            @error('position')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                        <div class="form-group col-sm-10 text-secondary">
+                            <input type="text" class="form-control" name="position"
+                                value="{{ old('position', $team->position) }}" />
+
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-2">
                             <h6 class="mb-0">Facebook</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
-                            <input type="text" class="form-control @error('facebook') is-invalid @enderror"
-                                name="facebook" value="{{ old('facebook', $team->facebook) }}" />
-                            @error('facebook')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                        <div class="form-group col-sm-10 text-secondary">
+                            <input type="text" class="form-control" name="facebook"
+                                value="{{ old('facebook', $team->facebook) }}" />
+
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-2">
                             <h6 class="mb-0">Instagram</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
-                            <input type="text" class="form-control @error('instagram') is-invalid @enderror"
-                                name="instagram" value="{{ old('instagram', $team->instagram) }}" />
-                            @error('instagram')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                        <div class="form-group col-sm-10 text-secondary">
+                            <input type="text" class="form-control " name="instagram"
+                                value="{{ old('instagram', $team->instagram) }}" />
+
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-2">
                             <h6 class="mb-0">Twitter</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
-                            <input type="text" class="form-control @error('twitter') is-invalid @enderror" name="twitter"
+                        <div class="form-group col-sm-10 text-secondary">
+                            <input type="text" class="form-control" name="twitter"
                                 value="{{ old('twitter', $team->twitter) }}" />
-                            @error('twitter')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -140,6 +130,42 @@
                     $('#showImage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0'])
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#myForm').validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    position: {
+                        required: true,
+                    },
+
+                },
+                messages: {
+                    name: {
+                        required: 'Please Enter Team Name',
+                    },
+                    position: {
+                        required: 'Please Enter Position',
+                    },
+
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                },
             });
         });
     </script>

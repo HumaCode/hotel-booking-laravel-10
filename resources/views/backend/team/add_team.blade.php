@@ -28,14 +28,14 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" id="myForm">
                     @csrf
 
                     <div class="row mb-3">
                         <div class="col-sm-2">
                             <h6 class="mb-0">Name</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
+                        <div class="form-group col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                                 value="{{ old('name') }}" />
                             @error('name')
@@ -47,7 +47,7 @@
                         <div class="col-sm-2">
                             <h6 class="mb-0">Position</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
+                        <div class="form-group col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('position') is-invalid @enderror"
                                 name="position" value="{{ old('position') }}" />
                             @error('position')
@@ -59,7 +59,7 @@
                         <div class="col-sm-2">
                             <h6 class="mb-0">Facebook</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
+                        <div class="form-group col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('facebook') is-invalid @enderror"
                                 name="facebook" value="{{ old('facebook') }}" />
                             @error('facebook')
@@ -71,7 +71,7 @@
                         <div class="col-sm-2">
                             <h6 class="mb-0">Instagram</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
+                        <div class="form-group col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('instagram') is-invalid @enderror"
                                 name="instagram" value="{{ old('instagram') }}" />
                             @error('instagram')
@@ -83,7 +83,7 @@
                         <div class="col-sm-2">
                             <h6 class="mb-0">Twitter</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
+                        <div class="form-group col-sm-10 text-secondary">
                             <input type="text" class="form-control @error('twitter') is-invalid @enderror" name="twitter"
                                 value="{{ old('twitter') }}" />
                             @error('twitter')
@@ -95,7 +95,7 @@
                         <div class="col-sm-2">
                             <h6 class="mb-0">Image</h6>
                         </div>
-                        <div class="col-sm-10 text-secondary">
+                        <div class="form-group col-sm-10 text-secondary">
                             <input class="form-control @error('image') is-invalid @enderror" type="file" name="image"
                                 id="image">
                             @error('image')
@@ -138,6 +138,48 @@
                     $('#showImage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0'])
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#myForm').validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    position: {
+                        required: true,
+                    },
+                    image: {
+                        required: true,
+                    }
+
+                },
+                messages: {
+                    name: {
+                        required: 'Please Enter Team Name',
+                    },
+                    position: {
+                        required: 'Please Enter Position',
+                    },
+                    image: {
+                        required: 'Please Input Image',
+                    },
+
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                },
             });
         });
     </script>

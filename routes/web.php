@@ -22,10 +22,9 @@ Route::get('/dashboard', function () {
     return view('frontend.dashboard.user_dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth', 'roles:user'])->group(function () {
+    Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
+    Route::post('/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');
 });
 
 require __DIR__ . '/auth.php';

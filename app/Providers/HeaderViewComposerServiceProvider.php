@@ -26,5 +26,11 @@ class HeaderViewComposerServiceProvider extends ServiceProvider
 
             $view->with(['profileData' => $profileData]);
         });
+
+        View::composer('frontend.dashboard.user_menu', function ($view) {
+            $profileData = User::find(auth()->user()->id); // Misalnya, Anda ingin mengambil data user saat ini
+
+            $view->with(['profileData' => $profileData]);
+        });
     }
 }

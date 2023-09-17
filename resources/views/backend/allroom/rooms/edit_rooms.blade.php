@@ -302,19 +302,47 @@
 
 
                     <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                            Exercitation
-                            +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-                            farm-to-table
-                            craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-                            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus
-                            mollit.
-                            Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
-                            odio
-                            cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson
-                            biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus
-                            tattooed
-                            echo park.</p>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <button type="button" class="btn btn-outline-primary px-5">Add New</button>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="roomnoHide" id="roomnoHide">
+                                    <form action="">
+
+                                        <div class="row">
+                                            <div class="col-md-4 mb-2">
+                                                <label for="room_no" class="form-label">Room No</label>
+                                                <input type="number" min="0" class="form-control" name="room_no"
+                                                    id="room_no" value="{{ old('room_no') }}">
+                                            </div>
+
+                                            <div class="col-md-4 mb-2">
+                                                <label for="status" class="form-label">Status</label>
+                                                <select id="status" name="status" class="form-select">
+                                                    <option disabled selected>Choose...</option>
+                                                    <option value="Active">Active
+                                                    </option>
+                                                    <option value="Inactive">Inactive
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-4 mb-2">
+                                                <label for="status" class="form-label "></label>
+                                                <button type="submit"
+                                                    class="btn btn-outline-success px-5 form-control mt-2">Save</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -43,15 +43,15 @@
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}.</td>
                                     <td class="text-center">
-                                        <img src="{{ !empty($item->roomtype->image) ? url($item->roomtype->image) : asset('uploads/noimage.jpg') }}"
+                                        <img src="{{ !empty($item->room->image) ? url($item->room->image) : asset('uploads/noimage.jpg') }}"
                                             alt="Room Image" class="p-1 bg-primary" width="70" height="40">
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('edit.team', $item->id) }}"
+                                        <a href="{{ route('edit.room', $item->room->id) }}"
                                             class="btn btn-outline-warning px-3 radius-30">Edit</a> &nbsp;
-                                        <a href="{{ route('delete.team', $item->id) }}"
-                                            class="btn btn-outline-danger px-3 radius-30" id="delete">Delete</a>
+                                        <a href="" class="btn btn-outline-danger px-3 radius-30"
+                                            id="delete">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

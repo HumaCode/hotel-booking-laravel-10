@@ -12,7 +12,7 @@ class RoomTypeController extends Controller
 {
     public function roomTypeList()
     {
-        $allData = RoomType::orderBy('id', 'desc')->get();
+        $allData = RoomType::with('room')->orderBy('id', 'desc')->get();
 
         return view('backend.allroom.roomtype.view_roomtype', compact('allData'));
     }

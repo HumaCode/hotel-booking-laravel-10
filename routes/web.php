@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomTypeController;
 use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\ProfileController;
@@ -72,10 +73,15 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::post('/book/area/update', 'bookAreaUpdate')->name('book.area.update');
     });
 
-    // room type
+    // roomtype
     Route::controller(RoomTypeController::class)->group(function () {
         Route::get('/room/type/list', 'roomTypeList')->name('room.type.list');
         Route::get('/add/room/type', 'addRoomType')->name('add.room.type');
         Route::post('/room/type/store', 'roomTypeStore')->name('room.type.store');
+    });
+
+    // room
+    Route::controller(RoomController::class)->group(function () {
+        Route::get('/edit/room/{id}', 'editRoom')->name('edit.room');
     });
 });

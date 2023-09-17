@@ -18,11 +18,13 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
+
+        {{-- team --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
-                <div class="menu-title">Manage Teams</div>
+                <div class="menu-title">Manage Team</div>
             </a>
             <ul>
                 <li> <a href="{{ route('all.team') }}"><i class='bx bx-radio-circle'></i>All Team</a>
@@ -31,6 +33,20 @@
                 </li>
             </ul>
         </li>
+
+        {{-- book area --}}
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Manage Book Area</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('book.area') }}"><i class='bx bx-radio-circle'></i>Update Book Area</a>
+                </li>
+            </ul>
+        </li>
+
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>

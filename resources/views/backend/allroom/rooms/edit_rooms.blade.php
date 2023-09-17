@@ -64,7 +64,7 @@
                                         <div class="col-md-4">
                                             <label for="roomtype_id" class="form-label">Room Type Name</label>
                                             <input type="text" class="form-control" id="roomtype_id" name="roomtype_id"
-                                                value="{{ $editData->type->name }}">
+                                                value="{{ $editData->type->name }}" disabled>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="total_adult" class="form-label">Total Adult</label>
@@ -96,7 +96,8 @@
                                                     alt="Main Image" class="p-1 bg-primary mt-2" width="110"
                                                     id="showImage">
 
-                                                <a href=""><i class="lni lni-close"></i></a>
+                                                <a href="{{ route('multi.image.delete', $item->id) }}"><i
+                                                        class="lni lni-close"></i></a>
                                             @endforeach
                                             <hr>
 

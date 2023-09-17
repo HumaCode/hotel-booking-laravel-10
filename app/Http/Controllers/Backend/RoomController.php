@@ -151,4 +151,49 @@ class RoomController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function multiImageDelete($id)
+    {
+        $deletedata = MultiImage::where('id', $id)->first();
+        if ($deletedata) {
+            $imagePath = $deletedata->multi_img;
+
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+                echo 'Image Unlinked Successfully.';
+
+                // Mendapatkan path folder yang berisi gambar
+                $folderPath = dirname($imagePath);
+
+                // Mendapatkan nama file temporernya (tanpa ekstensi)
+                $tempImage = pathinfo($imagePath, PATHINFO_FILENAME);
+
+                // Path file temporernya
+                $tempImagePath = $folderPath . '/' . $tempImage . '.tmp';
+
+                // Hapus file temporernya jika ada
+                if (file_exists($tempImagePath)) {
+                    unlink($tempImagePath);
+                }
+
+                // Hapus folder jika kosong
+                if (count(glob($folderPath . '/*')) === 0) {
+                    rmdir($folderPath);
+                }
+            } else {
+                echo 'Image Does not exist.';
+            }
+
+            $deletedata->delete(); // Menghapus entri gambar dari database
+        } else {
+            echo 'Image Data Does not exist.';
+        }
+
+        $notification = [
+            'message'       => 'MultiImage deleted Successfully.',
+            'alert-type'    => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
 }

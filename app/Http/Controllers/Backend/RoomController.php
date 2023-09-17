@@ -220,4 +220,45 @@ class RoomController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function editRoomNo($id)
+    {
+        $editroomno = RoomNumber::findOrFail($id);
+
+        return view('backend.allroom.rooms.edit_room_no', compact('editroomno'));
+    }
+
+    public function updateRoomNo(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'room_no'      => 'required',
+            'status'       => 'required',
+        ]);
+
+        $data = RoomNumber::findOrFail($id);
+
+        $data->room_no  = $validated['room_no'];
+        $data->status   = $validated['status'];
+        $data->save();
+
+        $notification = [
+            'message'       => 'Room Number Updated Successfully.',
+            'alert-type'    => 'success'
+        ];
+
+        return redirect()->route('room.type.list')->with($notification);
+    }
+
+    public function deleteRoomNo($id)
+    {
+        $data = RoomNumber::findOrFail($id);
+        $data->delete();
+
+        $notification = [
+            'message'       => 'Room Number Deleted Successfully.',
+            'alert-type'    => 'success'
+        ];
+
+        return redirect()->route('room.type.list')->with($notification);
+    }
 }

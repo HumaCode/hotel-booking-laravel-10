@@ -318,19 +318,27 @@
                                         <div class="row">
                                             <div class="col-md-4 mb-2">
                                                 <label for="room_no" class="form-label">Room No</label>
-                                                <input type="number" min="0" class="form-control" name="room_no"
-                                                    id="room_no" value="{{ old('room_no') }}">
+                                                <input type="number" min="0"
+                                                    class="form-control @error('room_no') is-invalid @enderror"
+                                                    name="room_no" id="room_no" value="{{ old('room_no') }}">
+                                                @error('room_no')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
 
                                             <div class="col-md-4 mb-2">
                                                 <label for="status" class="form-label">Status</label>
-                                                <select id="status" name="status" class="form-select">
+                                                <select id="status" name="status"
+                                                    class="form-select @error('status') is-invalid @enderror">
                                                     <option disabled selected>Choose...</option>
                                                     <option value="Active">Active
                                                     </option>
                                                     <option value="Inactive">Inactive
                                                     </option>
                                                 </select>
+                                                @error('status')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
 
                                             <div class="col-md-4 mb-2">
@@ -366,11 +374,13 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="" class="btn btn-outline-warning btn-sm"><i
+                                                    <a href="{{ route('edit.roomno', $item->id) }}"
+                                                        class="btn btn-outline-warning btn-sm"><i
                                                             class="lni lni-pencil me-0"></i>
                                                     </a> &nbsp;
-                                                    <a href="" class="btn btn-outline-danger btn-sm"
-                                                        id="delete"><i class="lni lni-trash me-0"></i>
+                                                    <a href="{{ route('delete.roomno', $item->id) }}"
+                                                        class="btn btn-outline-danger btn-sm" id="delete"><i
+                                                            class="lni lni-trash me-0"></i>
                                                     </a>
                                                 </td>
                                             </tr>

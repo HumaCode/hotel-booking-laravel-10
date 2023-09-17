@@ -88,5 +88,8 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
         // room no
         Route::post('/store/room/no/{id}', 'storeRoomNo')->name('store.room.no');
+        Route::get('/edit/room/no/{id}', 'editRoomNo')->name('edit.roomno');
+        Route::post('/update/room/no/{id}', 'updateRoomNo')->name('update.roomno');
+        Route::get('/delete/room/no/{id}', 'deleteRoomNo')->name('delete.roomno');
     });
 });

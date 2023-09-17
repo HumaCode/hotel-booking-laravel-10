@@ -16,9 +16,10 @@ class RoomController extends Controller
     public function editRoom($id)
     {
         $editData       = Room::findOrFail($id);
+        $multiImgs      = MultiImage::where('rooms_id', $id)->get();
         $basic_facility = Facility::where('rooms_id', $id)->get();
 
-        return view('backend.allroom.rooms.edit_rooms', compact('editData', 'basic_facility'));
+        return view('backend.allroom.rooms.edit_rooms', compact('editData', 'basic_facility', 'multiImgs'));
     }
 
     public function updateRoom(Request $request, $id)
@@ -93,21 +94,51 @@ class RoomController extends Controller
         // update multiImage
         if ($room->save()) {
             $files = $request->multi_img;
+            // if (!empty($files)) {
+            //     $subimage = MultiImage::where('rooms_id', $id)->get()->toArray();
+
+            //     unlink($subimage->multi_img);
+            //     MultiImage::where('rooms_id', $id)->delete();
+            // }
             if (!empty($files)) {
-                $subimage = MultiImage::where('rooms_id', $id)->get()->toArray();
-                MultiImage::where('rooms_id', $id)->delete();
+                $subimages = MultiImage::where('rooms_id', $id)->get();
+
+                foreach ($subimages as $subimage) {
+                    $imagePath = $subimage->multi_img; // Path gambar
+                    $tempImage = pathinfo($imagePath, PATHINFO_FILENAME); // Nama file temporernya (tanpa ekstensi)
+
+                    // Hapus gambar dari sistem file jika ada
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+
+                    // Hapus folder jika file temporernya ada
+                    $folderPath = dirname($imagePath); // Path folder yang berisi gambar
+                    $tempImagePath = $folderPath . '/' . $tempImage . '.tmp'; // Path file temporernya
+
+                    if (file_exists($tempImagePath)) {
+                        unlink($tempImagePath);
+                    }
+
+                    // Hapus entri gambar dari database
+                    $subimage->delete();
+
+                    // Hapus folder jika kosong
+                    if (count(glob($folderPath . '/*')) === 0) {
+                        rmdir($folderPath);
+                    }
+                }
             }
 
             if (!empty($files)) {
                 foreach ($files as $file) {
-                    $imageName = date('YmdHi') . $file->getClientOriginalName();
-                    $file->move('uploads/rooming/multi_img/' . $imageName);
-                    $subimage['multi_img'] = $imageName;
+                    $imgName = date('YmdHi') . $file->getClientOriginalName();
+                    $imageName = $file->move('uploads/rooming/multi_img/' . $imgName);
+                    $subimage['multi_img'] = $imgName;
 
                     $subimage = new MultiImage();
                     $subimage->rooms_id     = $room->id;
                     $subimage->multi_img    = $imageName;
-                    $subimage->created_at   = Carbon::now();
                     $subimage->save();
                 }
             }

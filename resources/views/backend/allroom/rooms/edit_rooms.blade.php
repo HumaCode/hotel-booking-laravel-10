@@ -83,14 +83,24 @@
                                                 accept=".png,.jpg,.jpeg,.gif">
 
                                             <img src="{{ !empty($editData->image) ? url($editData->image) : asset('uploads/noimage.jpg') }}"
-                                                alt="Main Image" class="p-1 bg-primary mt-2" width="110" id="showImage">
+                                                alt="Main Image" class="p-1 bg-primary mt-2" width="110" height="120"
+                                                id="showImage">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="multiImg" class="form-label">Galery Image</label>
                                             <input type="file" name="multi_img[]" multiple class="form-control"
                                                 id="multiImg" accept=".png,.jpg,.jpeg,.gif">
 
-                                            <div class="row" id="preview_img"></div>
+                                            @foreach ($multiImgs as $item)
+                                                <img src="{{ !empty($item->multi_img) ? url($item->multi_img) : asset('uploads/noimage.jpg') }}"
+                                                    alt="Main Image" class="p-1 bg-primary mt-2" width="110"
+                                                    id="showImage">
+
+                                                <a href=""><i class="lni lni-close"></i></a>
+                                            @endforeach
+                                            <hr>
+
+                                            <div class="row mt-2" id="preview_img"></div>
                                         </div>
 
                                         <div class="col-md-3">
@@ -169,7 +179,7 @@
                                                                         {{ $item->facility_name == 'Complimentary Breakfast' ? 'selected' : '' }}>
                                                                         Complimentary Breakfast</option>
                                                                     <option value="32/42 inch LED TV"
-                                                                        {{ $item->facility_name == 'Complimentary Breakfast' ? 'selected' : '' }}>
+                                                                        {{ $item->facility_name == '32/42 inch LED TV' ? 'selected' : '' }}>
                                                                         32/42 inch LED TV</option>
 
                                                                     <option value="Smoke alarms"
@@ -177,7 +187,7 @@
                                                                         Smoke alarms</option>
 
                                                                     <option value="Minibar"
-                                                                        {{ $item->facility_name == 'Complimentary Breakfast' ? 'selected' : '' }}>
+                                                                        {{ $item->facility_name == 'Minibar' ? 'selected' : '' }}>
                                                                         Minibar</option>
 
                                                                     <option value="Work Desk"

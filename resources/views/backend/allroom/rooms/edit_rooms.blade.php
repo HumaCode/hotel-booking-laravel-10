@@ -74,12 +74,19 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="input4" class="form-label">Main Image</label>
-                                            <input type="file" class="form-control" id="input4" placeholder="Email">
+                                            <label for="image" class="form-label">Main Image</label>
+                                            <input type="file" class="form-control" name="image" id="image"
+                                                accept=".png,.jpg,.jpeg,.gif">
+
+                                            <img src="{{ !empty($editData->image) ? url($editData->image) : asset('uploads/noimage.jpg') }}"
+                                                alt="Main Image" class="p-1 bg-primary mt-2" width="110" id="showImage">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="input4" class="form-label">Galery Image</label>
-                                            <input type="file" class="form-control" id="input4" placeholder="Email">
+                                            <label for="multiImg" class="form-label">Galery Image</label>
+                                            <input type="file" name="multi_img[]" multiple class="form-control"
+                                                id="multiImg" accept=".png,.jpg,.jpeg,.gif">
+
+                                            <div class="row" id="preview_img"></div>
                                         </div>
 
                                         <div class="col-md-4">
@@ -127,10 +134,131 @@
                                             <textarea class="form-control" name="description" id="myeditorinstance">{!! $editData->description !!}</textarea>
                                         </div>
 
+                                        <div class="row mt-2">
+                                            <div class="col-md-12 mb-3">
+                                                @forelse ($basic_facility as $item)
+                                                    <div class="basic_facility_section_remove"
+                                                        id="basic_facility_section_remove">
+                                                        <div class="row add_item">
+                                                            <div class="col-md-8">
+                                                                <label for="facility_name" class="form-label"> Room
+                                                                    Facilities </label>
+                                                                <select name="facility_name[]" id="facility_name"
+                                                                    class="form-control">
+                                                                    <option value="">Select Facility</option>
+                                                                    <option value="Complimentary Breakfast"
+                                                                        {{ $item->facility_name == 'Complimentary Breakfast' ? 'selected' : '' }}>
+                                                                        Complimentary Breakfast</option>
+                                                                    <option value="32/42 inch LED TV"
+                                                                        {{ $item->facility_name == 'Complimentary Breakfast' ? 'selected' : '' }}>
+                                                                        32/42 inch LED TV</option>
+
+                                                                    <option value="Smoke alarms"
+                                                                        {{ $item->facility_name == 'Smoke alarms' ? 'selected' : '' }}>
+                                                                        Smoke alarms</option>
+
+                                                                    <option value="Minibar"
+                                                                        {{ $item->facility_name == 'Complimentary Breakfast' ? 'selected' : '' }}>
+                                                                        Minibar</option>
+
+                                                                    <option value="Work Desk"
+                                                                        {{ $item->facility_name == 'Work Desk' ? 'selected' : '' }}>
+                                                                        Work Desk</option>
+
+                                                                    <option value="Free Wi-Fi"
+                                                                        {{ $item->facility_name == 'Free Wi-Fi' ? 'selected' : '' }}>
+                                                                        Free Wi-Fi</option>
+
+                                                                    <option value="Safety box"
+                                                                        {{ $item->facility_name == 'Safety box' ? 'selected' : '' }}>
+                                                                        Safety box</option>
+
+                                                                    <option value="Rain Shower"
+                                                                        {{ $item->facility_name == 'Rain Shower' ? 'selected' : '' }}>
+                                                                        Rain Shower</option>
+
+                                                                    <option value="Slippers"
+                                                                        {{ $item->facility_name == 'Slippers' ? 'selected' : '' }}>
+                                                                        Slippers</option>
+
+                                                                    <option value="Hair dryer"
+                                                                        {{ $item->facility_name == 'Hair dryer' ? 'selected' : '' }}>
+                                                                        Hair dryer</option>
+
+                                                                    <option value="Wake-up service"
+                                                                        {{ $item->facility_name == 'Wake-up service' ? 'selected' : '' }}>
+                                                                        Wake-up service</option>
+
+                                                                    <option value="Laundry & Dry Cleaning"
+                                                                        {{ $item->facility_name == 'Laundry & Dry Cleaning' ? 'selected' : '' }}>
+                                                                        Laundry & Dry Cleaning</option>
+
+                                                                    <option value="Electronic door lock"
+                                                                        {{ $item->facility_name == 'Electronic door lock' ? 'selected' : '' }}>
+                                                                        Electronic door lock</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group" style="padding-top: 30px;">
+                                                                    <a class="btn btn-success addeventmore"><i
+                                                                            class="fa fa-plus-circle"></i></a>
+                                                                    <span class="btn btn-danger btn-sm removeeventmore"><i
+                                                                            class="fa fa-minus-circle"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                @empty
+
+                                                    <div class="basic_facility_section_remove"
+                                                        id="basic_facility_section_remove">
+                                                        <div class="row add_item">
+                                                            <div class="col-md-6">
+                                                                <label for="basic_facility_name" class="form-label">Room
+                                                                    Facilities </label>
+                                                                <select name="basic_facility_name[]"
+                                                                    id="basic_facility_name" class="form-control">
+                                                                    <option value="">Select Facility</option>
+                                                                    <option value="Complimentary Breakfast">Complimentary
+                                                                        Breakfast</option>
+                                                                    <option value="32/42 inch LED TV"> 32/42 inch LED TV
+                                                                    </option>
+                                                                    <option value="Smoke alarms">Smoke alarms</option>
+                                                                    <option value="Minibar"> Minibar</option>
+                                                                    <option value="Work Desk">Work Desk</option>
+                                                                    <option value="Free Wi-Fi">Free Wi-Fi</option>
+                                                                    <option value="Safety box">Safety box</option>
+                                                                    <option value="Rain Shower">Rain Shower</option>
+                                                                    <option value="Slippers">Slippers</option>
+                                                                    <option value="Hair dryer">Hair dryer</option>
+                                                                    <option value="Wake-up service">Wake-up service
+                                                                    </option>
+                                                                    <option value="Laundry & Dry Cleaning">Laundry & Dry
+                                                                        Cleaning</option>
+                                                                    <option value="Electronic door lock">Electronic door
+                                                                        lock</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group" style="padding-top: 30px;">
+                                                                    <a class="btn btn-success addeventmore"><i
+                                                                            class="lni lni-circle-plus"></i></a>
+
+                                                                    <span class="btn btn-danger removeeventmore"><i
+                                                                            class="lni lni-circle-minus"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforelse
+                                            </div>
+                                        </div>
+                                        <br>
 
                                         <div class="col-md-12">
                                             <div class="d-md-flex d-grid align-items-center gap-3">
-                                                <button type="button" class="btn btn-primary px-4">Submit</button>
+                                                <button type="submit" class="btn btn-primary px-4">Save Change</button>
                                                 <button type="button" class="btn btn-light px-4">Reset</button>
                                             </div>
                                         </div>
@@ -164,3 +292,102 @@
 
     </div>
 @endsection
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0'])
+            });
+        });
+    </script>
+
+    <!--------===Show MultiImage ========------->
+    <script>
+        $(document).ready(function() {
+            $('#multiImg').on('change', function() { //on file input change
+                if (window.File && window.FileReader && window.FileList && window
+                    .Blob) //check File API supported browser
+                {
+                    var data = $(this)[0].files; //this file data
+
+                    $.each(data, function(index, file) { //loop though each file
+                        if (/(\.|\/)(gif|jpe?g|png)$/i.test(file
+                                .type)) { //check supported file type
+                            var fRead = new FileReader(); //new filereader
+                            fRead.onload = (function(file) { //trigger function on successful read
+                                return function(e) {
+                                    var img = $('<img/>').addClass('thumb').attr('src',
+                                            e.target.result).width(100)
+                                        .height(80); //create image element 
+                                    $('#preview_img').append(
+                                        img); //append image to output element
+                                };
+                            })(file);
+                            fRead.readAsDataURL(file); //URL representing the file's data.
+                        }
+                    });
+
+                } else {
+                    alert("Your browser doesn't support File API!"); //if File API is absent
+                }
+            });
+        });
+    </script>
+
+    <!--========== Start of add Basic Plan Facilities ==============-->
+    <div style="visibility: hidden">
+        <div class="whole_extra_item_add" id="whole_extra_item_add">
+            <div class="basic_facility_section_remove" id="basic_facility_section_remove">
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="basic_facility_name">Room Facilities</label>
+                            <select name="basic_facility_name[]" id="basic_facility_name" class="form-control">
+                                <option value="">Select Facility</option>
+                                <option value="Complimentary Breakfast">Complimentary Breakfast</option>
+                                <option value="32/42 inch LED TV"> 32/42 inch LED TV</option>
+                                <option value="Smoke alarms">Smoke alarms</option>
+                                <option value="Minibar"> Minibar</option>
+                                <option value="Work Desk">Work Desk</option>
+                                <option value="Free Wi-Fi">Free Wi-Fi</option>
+                                <option value="Safety box">Safety box</option>
+                                <option value="Rain Shower">Rain Shower</option>
+                                <option value="Slippers">Slippers</option>
+                                <option value="Hair dryer">Hair dryer</option>
+                                <option value="Wake-up service">Wake-up service</option>
+                                <option value="Laundry & Dry Cleaning">Laundry & Dry Cleaning</option>
+                                <option value="Electronic door lock">Electronic door lock</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6" style="padding-top: 20px">
+                            <span class="btn btn-success addeventmore"><i class="lni lni-circle-plus"></i></span>
+                            <span class="btn btn-danger removeeventmore"><i class="lni lni-circle-minus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var counter = 0;
+            $(document).on("click", ".addeventmore", function() {
+                var whole_extra_item_add = $("#whole_extra_item_add").html();
+                $(this).closest(".add_item").append(whole_extra_item_add);
+                counter++;
+            });
+            $(document).on("click", ".removeeventmore", function(event) {
+                $(this).closest("#basic_facility_section_remove").remove();
+                counter -= 1
+            });
+        });
+    </script>
+    <!--========== End of Basic Plan Facilities ==============-->
+@endpush

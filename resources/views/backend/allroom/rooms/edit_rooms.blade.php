@@ -302,15 +302,18 @@
 
 
                     <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-
                         <div class="card">
-                            <div class="card-header">
-                                <button type="button" class="btn btn-outline-primary px-5">Add New</button>
-                            </div>
                             <div class="card-body">
 
+                                <button type="button" class="btn btn-outline-primary px-5" onclick="addRoomNo()"
+                                    id="addRoomNo">Add
+                                    New</button>
+
                                 <div class="roomnoHide" id="roomnoHide">
-                                    <form action="">
+                                    <form action="{{ route('store.room.no', $editData->id) }}" method="POST">
+                                        @csrf
+
+                                        <input type="hidden" name="room_type_id" value="{{ $editData->roomtype_id }}">
 
                                         <div class="row">
                                             <div class="col-md-4 mb-2">
@@ -339,6 +342,43 @@
 
                                     </form>
                                 </div>
+
+                                <table class="table mb-0 mt-2" id="roomview">
+                                    <thead class="table-dark text-center">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Room Number</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach ($allRoomNo as $item)
+                                            <tr>
+                                                <th class="text-center">{{ $loop->iteration }}.</th>
+                                                <td>{{ $item->room_no }}</td>
+                                                <td class="text-center">
+                                                    @if ($item->status == 'Active')
+                                                        <span class="badge bg-success">{{ $item->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-danger">{{ $item->status }}</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="" class="btn btn-outline-warning btn-sm"><i
+                                                            class="lni lni-pencil me-0"></i>
+                                                    </a> &nbsp;
+                                                    <a href="" class="btn btn-outline-danger btn-sm"
+                                                        id="delete"><i class="lni lni-trash me-0"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>
@@ -448,4 +488,17 @@
         });
     </script>
     <!--========== End of Basic Plan Facilities ==============-->
+
+
+    {{-- room view --}}
+    <script>
+        $('#roomnoHide').hide();
+        $('#roomview').show();
+
+        function addRoomNo() {
+            $('#roomnoHide').show();
+            $('#roomview').hide();
+            $('#addRoomNo').hide();
+        }
+    </script>
 @endpush

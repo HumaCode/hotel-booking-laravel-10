@@ -7,6 +7,7 @@ use App\Models\Facility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MultiImage;
+use App\Models\RoomNumber;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use PHPUnit\Framework\Constraint\Count;
@@ -18,8 +19,9 @@ class RoomController extends Controller
         $editData       = Room::findOrFail($id);
         $multiImgs      = MultiImage::where('rooms_id', $id)->get();
         $basic_facility = Facility::where('rooms_id', $id)->get();
+        $allRoomNo      = RoomNumber::where('rooms_id', $id)->get();
 
-        return view('backend.allroom.rooms.edit_rooms', compact('editData', 'basic_facility', 'multiImgs'));
+        return view('backend.allroom.rooms.edit_rooms', compact('editData', 'basic_facility', 'multiImgs', 'allRoomNo'));
     }
 
     public function updateRoom(Request $request, $id)
@@ -191,6 +193,28 @@ class RoomController extends Controller
 
         $notification = [
             'message'       => 'MultiImage deleted Successfully.',
+            'alert-type'    => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function storeRoomNo(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'room_no'      => 'required',
+            'status'       => 'required',
+        ]);
+
+        $data = new RoomNumber();
+        $data->rooms_id         = $id;
+        $data->room_type_id     = $request->room_type_id;
+        $data->room_no          = $validated['room_no'];
+        $data->status           = $validated['status'];
+        $data->save();
+
+        $notification = [
+            'message'       => 'Room Number Added Successfully.',
             'alert-type'    => 'success'
         ];
 

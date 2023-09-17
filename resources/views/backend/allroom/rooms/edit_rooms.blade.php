@@ -56,7 +56,11 @@
                             <div class="card">
                                 <div class="card-body p-4">
                                     <h5 class="mb-4">Update Room</h5>
-                                    <form class="row g-3">
+
+                                    <form class="row g-3" action="{{ route('update.room', $editData->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+
                                         <div class="col-md-4">
                                             <label for="roomtype_id" class="form-label">Room Type Name</label>
                                             <input type="text" class="form-control" id="roomtype_id" name="roomtype_id"
@@ -65,12 +69,12 @@
                                         <div class="col-md-4">
                                             <label for="total_adult" class="form-label">Total Adult</label>
                                             <input type="text" name="total_adult" class="form-control" id="total_adult"
-                                                value="{{ $editData->total_adult }}">
+                                                value="{{ old('total_adult', $editData->total_adult) }}">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="total_child" class="form-label">Total Child</label>
                                             <input type="text" class="form-control" name="total_child" id="total_child"
-                                                value="{{ $editData->total_child }}">
+                                                value="{{ old('total_child', $editData->total_child) }}">
                                         </div>
 
                                         <div class="col-md-6">
@@ -89,49 +93,64 @@
                                             <div class="row" id="preview_img"></div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <label for="price" class="form-label">Room Price</label>
                                             <input type="text" class="form-control" id="price" name="price"
-                                                value="{{ $editData->price }}">
+                                                value="{{ old('price', $editData->price) }}">
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
+                                            <label for="size" class="form-label">Size</label>
+                                            <input type="number" min="0" name="size" class="form-control"
+                                                id="size" value="{{ old('size', $editData->size) }}">
+                                        </div>
+                                        <div class="col-md-3">
                                             <label for="discount" class="form-label">Discount (%)</label>
                                             <input type="number" min="0" name="discount" class="form-control"
-                                                id="discount" value="{{ $editData->discount }}">
+                                                id="discount" value="{{ old('discount', $editData->discount) }}">
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <label for="room_capacity" class="form-label">Room Capacity</label>
                                             <input type="number" min="0" class="form-control"
                                                 name="room_capacity" id="room_capacity"
-                                                value="{{ $editData->room_capacity }}">
+                                                value="{{ old('room_capacity', $editData->room_capacity) }}">
                                         </div>
 
                                         <div class="col-md-6">
                                             <label for="view" class="form-label">Room View</label>
                                             <select id="view" name="view" class="form-select">
-                                                <option selected="">Choose...</option>
-                                                <option value="Sea View">Sea View</option>
-                                                <option value="Hill View">Hill View</option>
+                                                <option disabled selected>Choose...</option>
+                                                <option value="Sea View"
+                                                    {{ $editData->view == 'Sea View' ? 'selected' : '' }}>Sea View
+                                                </option>
+                                                <option value="Hill View"
+                                                    {{ $editData->view == 'Hill View' ? 'selected' : '' }}>Hill View
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="bed_style" class="form-label">Bed Style</label>
                                             <select id="bed_style" name="bed_style" class="form-select">
-                                                <option selected="">Choose...</option>
-                                                <option value="Queen Bed">Queen Bed</option>
-                                                <option value="Twin Bed">Twin Bed</option>
-                                                <option value="King Bed">King Bed</option>
+                                                <option disabled selected>Choose...</option>
+                                                <option value="Queen Bed"
+                                                    {{ $editData->bed_style == 'Queen Bed' ? 'selected' : '' }}>Queen Bed
+                                                </option>
+                                                <option value="Twin Bed"
+                                                    {{ $editData->bed_style == 'Twin Bed' ? 'selected' : '' }}>Twin Bed
+                                                </option>
+                                                <option value="King Bed"
+                                                    {{ $editData->bed_style == 'King Bed' ? 'selected' : '' }}>King Bed
+                                                </option>
                                             </select>
                                         </div>
 
                                         <div class="col-md-12">
                                             <label for="short_desc" class="form-label">Short Description</label>
-                                            <textarea class="form-control" name="short_desc" id="short_desc" rows="3">{{ $editData->short_desc }}</textarea>
+                                            <textarea class="form-control" name="short_desc" id="short_desc" rows="3">{{ old('short_desc', $editData->short_desc) }}</textarea>
                                         </div>
 
                                         <div class="col-md-12">
                                             <label for="description" class="form-label">Description</label>
-                                            <textarea class="form-control" name="description" id="myeditorinstance">{!! $editData->description !!}</textarea>
+                                            <textarea class="form-control" name="description" id="myeditorinstance">{!! old('description', $editData->description) !!}</textarea>
                                         </div>
 
                                         <div class="row mt-2">
@@ -140,7 +159,7 @@
                                                     <div class="basic_facility_section_remove"
                                                         id="basic_facility_section_remove">
                                                         <div class="row add_item">
-                                                            <div class="col-md-8">
+                                                            <div class="col-md-10">
                                                                 <label for="facility_name" class="form-label"> Room
                                                                     Facilities </label>
                                                                 <select name="facility_name[]" id="facility_name"
@@ -198,12 +217,12 @@
                                                                         Electronic door lock</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-2">
                                                                 <div class="form-group" style="padding-top: 30px;">
                                                                     <a class="btn btn-success addeventmore"><i
-                                                                            class="fa fa-plus-circle"></i></a>
-                                                                    <span class="btn btn-danger btn-sm removeeventmore"><i
-                                                                            class="fa fa-minus-circle"></i></span>
+                                                                            class="lni lni-circle-plus"></i></a>
+                                                                    <span class="btn btn-danger removeeventmore"><i
+                                                                            class="lni lni-circle-minus"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -214,11 +233,11 @@
                                                     <div class="basic_facility_section_remove"
                                                         id="basic_facility_section_remove">
                                                         <div class="row add_item">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-10">
                                                                 <label for="basic_facility_name" class="form-label">Room
                                                                     Facilities </label>
-                                                                <select name="basic_facility_name[]"
-                                                                    id="basic_facility_name" class="form-control">
+                                                                <select name="facility_name[]" id="basic_facility_name"
+                                                                    class="form-control">
                                                                     <option value="">Select Facility</option>
                                                                     <option value="Complimentary Breakfast">Complimentary
                                                                         Breakfast</option>
@@ -240,7 +259,7 @@
                                                                         lock</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-2">
                                                                 <div class="form-group" style="padding-top: 30px;">
                                                                     <a class="btn btn-success addeventmore"><i
                                                                             class="lni lni-circle-plus"></i></a>
@@ -346,9 +365,9 @@
             <div class="basic_facility_section_remove" id="basic_facility_section_remove">
                 <div class="container mt-2">
                     <div class="row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-10">
                             <label for="basic_facility_name">Room Facilities</label>
-                            <select name="basic_facility_name[]" id="basic_facility_name" class="form-control">
+                            <select name="facility_name[]" id="basic_facility_name" class="form-control">
                                 <option value="">Select Facility</option>
                                 <option value="Complimentary Breakfast">Complimentary Breakfast</option>
                                 <option value="32/42 inch LED TV"> 32/42 inch LED TV</option>
@@ -365,7 +384,7 @@
                                 <option value="Electronic door lock">Electronic door lock</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6" style="padding-top: 20px">
+                        <div class="form-group col-md-2" style="padding-top: 20px">
                             <span class="btn btn-success addeventmore"><i class="lni lni-circle-plus"></i></span>
                             <span class="btn btn-danger removeeventmore"><i class="lni lni-circle-minus"></i></span>
                         </div>

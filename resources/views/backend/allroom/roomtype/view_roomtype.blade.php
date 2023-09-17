@@ -32,6 +32,7 @@
                         <thead class="text-center">
                             <tr>
                                 <th>S1</th>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Action</th>
                             </tr>
@@ -41,6 +42,10 @@
                             @foreach ($allData as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}.</td>
+                                    <td class="text-center">
+                                        <img src="{{ !empty($item->roomtype->image) ? url($item->roomtype->image) : asset('uploads/noimage.jpg') }}"
+                                            alt="Room Image" class="p-1 bg-primary" width="70" height="40">
+                                    </td>
                                     <td>{{ $item->name }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('edit.team', $item->id) }}"

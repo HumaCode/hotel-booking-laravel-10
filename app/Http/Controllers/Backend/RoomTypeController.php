@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
 use App\Models\RoomType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,8 +28,13 @@ class RoomTypeController extends Controller
             'name'      => 'required',
         ]);
 
-        RoomType::insert([
+        $roomtype_id = RoomType::insertGetId([
             'name'          => strtoupper($validate['name']),
+            'created_at'    => Carbon::now(),
+        ]);
+
+        Room::insert([
+            'roomtype_id'   => $roomtype_id,
             'created_at'    => Carbon::now(),
         ]);
 

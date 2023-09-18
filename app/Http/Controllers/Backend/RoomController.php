@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MultiImage;
 use App\Models\RoomNumber;
+use App\Models\RoomType;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use PHPUnit\Framework\Constraint\Count;
@@ -260,5 +261,57 @@ class RoomController extends Controller
         ];
 
         return redirect()->route('room.type.list')->with($notification);
+    }
+
+    public function deleteRoom(Request $request, $id)
+    {
+        $room = Room::find($id);
+
+        if (file_exists($room->image) and !empty($room->image)) {
+            unlink($room->image);
+        }
+
+        $subimages = MultiImage::where('rooms_id', $room->id)->get();
+
+        foreach ($subimages as $subimage) {
+            $imagePath = $subimage->multi_img; // Path gambar
+            $tempImage = pathinfo($imagePath, PATHINFO_FILENAME); // Nama file temporernya (tanpa ekstensi)
+
+            // Hapus gambar dari sistem file jika ada
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+            // Hapus folder jika file temporernya ada
+            $folderPath = dirname($imagePath); // Path folder yang berisi gambar
+            $tempImagePath = $folderPath . '/' . $tempImage . '.tmp'; // Path file temporernya
+
+            if (file_exists($tempImagePath)) {
+                unlink($tempImagePath);
+            }
+
+            // Hapus entri gambar dari database
+            $subimage->delete();
+
+            // Hapus folder jika kosong
+            if (count(glob($folderPath . '/*')) === 0) {
+                rmdir($folderPath);
+            }
+        }
+
+        MultiImage::where('rooms_id', $room->id)->delete();
+
+
+        RoomType::where('id', $room->roomtype_id)->delete();
+        Facility::where('rooms_id', $room->id)->delete();
+        RoomNumber::where('rooms_id', $room->id)->delete();
+        $room->delete();
+
+        $notification = [
+            'message'       => 'Room Deleted Successfully.',
+            'alert-type'    => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
     }
 }

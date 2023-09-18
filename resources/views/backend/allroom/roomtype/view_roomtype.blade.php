@@ -50,8 +50,8 @@
                                     <td class="text-center">
                                         <a href="{{ route('edit.room', $item->room->id) }}"
                                             class="btn btn-outline-warning px-3 radius-30">Edit</a> &nbsp;
-                                        <a href="" class="btn btn-outline-danger px-3 radius-30"
-                                            id="delete">Delete</a>
+                                        <a href="{{ route('delete.room', $item->room->id) }}"
+                                            class="btn btn-outline-danger px-3 radius-30" id="delete">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

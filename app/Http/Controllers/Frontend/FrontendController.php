@@ -18,7 +18,8 @@ class FrontendController extends Controller
     public function roomDetailPage($id)
     {
         $roomdetail = Room::with('type', 'multiimage', 'facility')->findOrFail($id);
+        $otherroom  = Room::with('type', 'multiimage', 'facility')->where('id', '!=', $id)->orderBy('id', 'DESC')->limit(2)->get();
 
-        return view('frontend.room.room_detail', compact('roomdetail'));
+        return view('frontend.room.room_detail', compact('roomdetail', 'otherroom'));
     }
 }

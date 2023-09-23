@@ -10,14 +10,14 @@ class FrontendController extends Controller
 {
     public function allFrontendRoomList()
     {
-        $rooms = Room::latest()->get();
+        $rooms = Room::with('type', 'multiimage', 'facility')->latest()->get();
 
         return view('frontend.room.all_rooms', compact('rooms'));
     }
 
     public function roomDetailPage($id)
     {
-        $roomdetail = Room::findOrFail($id);
+        $roomdetail = Room::with('type', 'multiimage', 'facility')->findOrFail($id);
 
         return view('frontend.room.room_detail', compact('roomdetail'));
     }

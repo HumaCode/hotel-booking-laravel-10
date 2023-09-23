@@ -41,7 +41,7 @@ class FrontViewComposerServiceProvider extends ServiceProvider
         });
 
         View::composer('frontend.home.room_area', function ($view) {
-            $rooms   = Room::with('type')->latest()->limit(4)->get();
+            $rooms   = Room::with('type', 'multiimage', 'facility')->latest()->limit(4)->get();
 
             $view->with([
                 'rooms'  => $rooms,
@@ -49,7 +49,7 @@ class FrontViewComposerServiceProvider extends ServiceProvider
         });
 
         View::composer('frontend.body.navbar', function ($view) {
-            $roomType   = Room::with('type')->latest()->get();
+            $roomType   = Room::with('type', 'multiimage', 'facility')->latest()->get();
 
             $view->with([
                 'roomType'  => $roomType,

@@ -41,10 +41,18 @@ class FrontViewComposerServiceProvider extends ServiceProvider
         });
 
         View::composer('frontend.home.room_area', function ($view) {
-            $rooms   = Room::latest()->limit(4)->get();
+            $rooms   = Room::with('type')->latest()->limit(4)->get();
 
             $view->with([
                 'rooms'  => $rooms,
+            ]);
+        });
+
+        View::composer('frontend.body.navbar', function ($view) {
+            $roomType   = Room::with('type')->latest()->get();
+
+            $view->with([
+                'roomType'  => $roomType,
             ]);
         });
     }

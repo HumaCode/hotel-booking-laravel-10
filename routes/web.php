@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomTypeController;
 use App\Http\Controllers\Backend\TeamController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -93,4 +94,10 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::get('/delete/room/no/{id}', 'deleteRoomNo')->name('delete.roomno');
         Route::get('/delete/room/{id}', 'deleteRoom')->name('delete.room');
     });
+});
+
+
+// frontend controller
+Route::controller(FrontendController::class)->group(function () {
+    Route::get('/rooms', 'allFrontendRoomLits')->name('froom.all');
 });

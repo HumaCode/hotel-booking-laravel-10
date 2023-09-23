@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HeaderViewComposerServiceProvider::class,
+        App\Providers\FrontViewComposerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class
     ])->toArray(),
 

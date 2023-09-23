@@ -12,7 +12,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-5 col-md-4 p-0">
                                 <div class="room-card-img">
-                                    <a href="room-details.html">
+                                    <a href="{{ url('room/details/' . $item->id) }}">
                                         <img src="{{ !empty($item->image) ? url($item->image) : asset('frontend/assets/img/room/room-style-img3.jpg') }}"
                                             alt="Images">
                                     </a>
@@ -22,7 +22,7 @@
                             <div class="col-lg-7 col-md-8 p-0">
                                 <div class="room-card-content">
                                     <h3>
-                                        <a href="room-details.html">{{ $item->type->name }}</a>
+                                        <a href="{{ url('room/details/' . $item->id) }}">{{ $item->type->name }}</a>
                                     </h3>
                                     <span>{{ $item->price }} / Per Night </span>
                                     <div class="rating">

@@ -35,7 +35,8 @@
                                     alt="Images" width="550" height="300">
                             </a>
                             <div class="content">
-                                <h6><a href="room-details.html" class="text-dark">{{ $item->type->name }}</a></h6>
+                                <h6><a href="{{ url('room/details/' . $item->id) }}"
+                                        class="text-dark">{{ $item->type->name }}</a></h6>
                                 <ul>
                                     <li class="text-color">{{ $item->price }}</li>
                                     <li class="text-color">Per Night</li>

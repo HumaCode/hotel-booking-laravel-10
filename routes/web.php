@@ -99,5 +99,8 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
 // frontend controller
 Route::controller(FrontendController::class)->group(function () {
-    Route::get('/rooms', 'allFrontendRoomLits')->name('froom.all');
+
+    // rooms
+    Route::get('/rooms', 'allFrontendRoomList')->name('froom.all');
+    Route::get('/room/details/{id}', 'roomDetailPage');
 });

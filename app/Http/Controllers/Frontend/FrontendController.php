@@ -8,10 +8,17 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    public function allFrontendRoomLits()
+    public function allFrontendRoomList()
     {
         $rooms = Room::latest()->get();
 
         return view('frontend.room.all_rooms', compact('rooms'));
+    }
+
+    public function roomDetailPage($id)
+    {
+        $roomdetail = Room::findOrFail($id);
+
+        return view('frontend.room.room_detail', compact('roomdetail'));
     }
 }

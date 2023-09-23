@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\BookArea;
+use App\Models\Room;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
@@ -36,6 +37,14 @@ class FrontViewComposerServiceProvider extends ServiceProvider
 
             $view->with([
                 'bookarea'  => $bookarea,
+            ]);
+        });
+
+        View::composer('frontend.home.room_area', function ($view) {
+            $rooms   = Room::latest()->limit(4)->get();
+
+            $view->with([
+                'rooms'  => $rooms,
             ]);
         });
     }

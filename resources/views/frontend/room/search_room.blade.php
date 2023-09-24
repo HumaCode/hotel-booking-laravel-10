@@ -45,12 +45,13 @@
                     @if ($av_room > 0 && old('persion') <= $item->total_adult)
                         <div class="col-lg-4 col-md-6">
                             <div class="room-card">
-                                <a href="{{ url('room/details/' . $item->id) }}">
+                                <a
+                                    href="{{ route('search_room_details', $item->id . '?check_in=' . old('check_in') . '&check_out=' . old('check_out') . '&persion=' . old('persion')) }}">
                                     <img src="{{ !empty($item->image) ? url($item->image) : asset('frontend/assets/img/room/room-style-img3.jpg') }}"
                                         alt="Images" width="550" height="300">
                                 </a>
                                 <div class="content">
-                                    <h6><a href="{{ url('room/details/' . $item->id) }}"
+                                    <h6><a href="{{ route('search_room_details', $item->id . '?check_in=' . old('check_in') . '&check_out=' . old('check_out') . '&persion=' . old('persion')) }}"
                                             class="text-dark">{{ $item->type->name }}</a></h6>
                                     <ul>
                                         <li class="text-color">{{ $item->price }}</li>
@@ -75,7 +76,7 @@
                     <div class="text-center text-danger">Sorry no data found.</div>
                 @endif
 
-                <div class="col-lg-12 col-md-12">
+                {{-- <div class="col-lg-12 col-md-12">
                     <div class="pagination-area">
                         <a href="#" class="prev page-numbers">
                             <i class='bx bx-chevrons-left'></i>
@@ -89,7 +90,7 @@
                             <i class='bx bx-chevrons-right'></i>
                         </a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

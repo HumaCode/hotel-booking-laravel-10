@@ -70,6 +70,7 @@ class RoomController extends Controller
         $room->discount         = $validated['discount'];
         $room->short_desc       = $validated['short_desc'];
         $room->description      = $validated['description'];
+        $room->status           = 1;
         $room->updated_at       = Carbon::now();
         $room->save();
 

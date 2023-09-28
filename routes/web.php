@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomTypeController;
 use App\Http\Controllers\Backend\TeamController;
+use App\Http\Controllers\Frontend\BookingController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -106,4 +107,16 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/bookings', 'bookingSearch')->name('booking.search');
     Route::get('/search/room/details/{id}', 'searchRoomDetails')->name('search_room_details');
     Route::get('/check_room_availability', 'checkRoomAvailability')->name('check_room_availability');
+});
+
+
+// midleware user
+Route::middleware(['auth'])->group(function () {
+
+    // checkout
+    Route::controller(BookingController::class)->group(function () {
+
+        Route::get('/checkout', 'checkout')->name('checkout');
+        Route::post('/booking/store/', 'bookingStore')->name('user_booking_store');
+    });
 });

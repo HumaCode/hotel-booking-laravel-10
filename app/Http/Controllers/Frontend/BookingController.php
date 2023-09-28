@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -10,7 +12,23 @@ class BookingController extends Controller
 {
     public function checkout()
     {
-        return view('frontend.checkout.checkout');
+        // jika ada session
+        if (Session::has('book_date')) {
+            $book_data = Session::get('book_date');
+            $room = Room::with('type')->find($book_data['room_id']);
+
+            $toDate = Carbon::parse($book_data['check_in']);
+            $fromDate = Carbon::parse($book_data['check_out']);
+            $nights     = $toDate->diffInDays($fromDate);
+
+            return view('frontend.checkout.checkout', compact('book_data', 'room', 'nights'));
+        } else {
+            $notification = array(
+                'message' => 'Something want to wrong!',
+                'alert-type' => 'error'
+            );
+            return redirect('/')->with($notification);
+        }
     }
 
     public function bookingStore(Request $request)

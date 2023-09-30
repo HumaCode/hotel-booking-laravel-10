@@ -118,5 +118,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/checkout', 'checkout')->name('checkout');
         Route::post('/booking/store/', 'bookingStore')->name('user_booking_store');
+        Route::post('/checkout/store/', 'checkoutStore')->name('checkout.store');
     });
 });

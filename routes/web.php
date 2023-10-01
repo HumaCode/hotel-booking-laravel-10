@@ -95,6 +95,11 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::get('/delete/room/no/{id}', 'deleteRoomNo')->name('delete.roomno');
         Route::get('/delete/room/{id}', 'deleteRoom')->name('delete.room');
     });
+
+    // admin booking route
+    Route::controller(BookingController::class)->group(function () {
+        Route::get('/booking/list', 'bookingList')->name('booking.list');
+    });
 });
 
 

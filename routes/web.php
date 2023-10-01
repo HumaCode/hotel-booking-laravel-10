@@ -129,5 +129,6 @@ Route::middleware(['auth'])->group(function () {
 
         // booking update
         Route::post('/update/booking/status/{id}', 'updateBookingStatus')->name('update.booking.status');
+        Route::post('/update/booking/{id}', 'updateBooking')->name('update.booking');
     });
 });

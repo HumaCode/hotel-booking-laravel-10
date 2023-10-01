@@ -214,7 +214,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="">
+                        <form action="{{ route('update.booking', $editData->id) }}" method="POST">
+                            @csrf
+
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label for="" class="mb-2">Check In</label>
@@ -235,8 +237,7 @@
                                         value="{{ $editData->number_of_rooms }}">
                                 </div>
 
-                                <input type="hidden" name="available_room" id="available_room"
-                                    value="{{ $editData->number_of_rooms }}">
+                                <input type="hidden" name="available_room" id="available_room">
 
                                 <div class="col-md-12 mb-3">
                                     <label for="" class="mb-2">Availablity : <span

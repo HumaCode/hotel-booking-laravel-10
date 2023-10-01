@@ -1,5 +1,9 @@
 @extends('admin.admin_dashboard')
 
+@push('styles')
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+@endpush
 
 @section('admin')
     <div class="page-content">
@@ -214,21 +218,25 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label for="" class="mb-2">Check In</label>
-                                    <input type="date" required name="check_in" class="form-control"
+                                    <input type="date" required name="check_in" id="check_in" class="form-control"
                                         value="{{ $editData->check_in }}">
                                 </div>
 
                                 <div class="col-md-12 mb-3">
                                     <label for="" class="mb-2">Check Out</label>
-                                    <input type="date" required name="check_out" class="form-control"
+                                    <input type="date" required name="check_out" id="check_out" class="form-control"
                                         value="{{ $editData->check_out }}">
                                 </div>
 
                                 <div class="col-md-12 mb-3">
                                     <label for="" class="mb-2">Room</label>
-                                    <input type="number" min="0" required name="number_of_rooms"
-                                        class="form-control" value="{{ $editData->number_of_rooms }}">
+                                    <input type="number" min="0" required id="number_of_rooms"
+                                        name="number_of_rooms" class="form-control"
+                                        value="{{ $editData->number_of_rooms }}">
                                 </div>
+
+                                <input type="hidden" name="available_room" id="available_room"
+                                    value="{{ $editData->number_of_rooms }}">
 
                                 <div class="col-md-12 mb-3">
                                     <label for="" class="mb-2">Availablity : <span
@@ -304,3 +312,32 @@
 
     </div>
 @endsection
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            getAvaility();
+        });
+
+
+        function getAvaility() {
+            var check_in = $('#check_in').val();
+            var check_out = $('#check_out').val();
+            var room_id = "{{ $editData->rooms_id }}";
+
+            $.ajax({
+                url: "{{ route('check_room_availability') }}",
+                data: {
+                    room_id: room_id,
+                    check_in: check_in,
+                    check_out: check_out
+                },
+                success: function(data) {
+                    $('.availablity').text(data['available_room']);
+                    $('#available_room').val(data['available_room']);
+                }
+            });
+        }
+    </script>
+@endpush

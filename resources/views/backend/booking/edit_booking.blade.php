@@ -160,7 +160,9 @@
                             </div>
                         </div>
 
-                        <form action="">
+                        <form action="{{ route('update.booking.status', $editData->id) }}" method="POST">
+                            @csrf
+
                             <div class="row" style="margin-top: 40px">
                                 <div class="col-md-6">
                                     <label for="" class="mb-2">Payment Status</label>

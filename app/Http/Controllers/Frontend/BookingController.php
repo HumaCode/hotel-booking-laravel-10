@@ -191,4 +191,18 @@ class BookingController extends Controller
 
         return view('backend.booking.edit_booking', compact('editData'));
     }
+
+    public function updateBookingStatus(Request $request, $id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->payment_status    = $request->payment_status;
+        $booking->status            = $request->status;
+        $booking->save();
+
+        $notification = array(
+            'message'       => 'Information updated successfully.',
+            'alert-type'    => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
 }

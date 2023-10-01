@@ -18,7 +18,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('add.team') }}" class="btn btn-outline-primary px-5 radius-30">Add Team</a>
+                    <a href="{{ route('add.team') }}" class="btn btn-outline-primary px-5 radius-30">Add Booking</a>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <table id="example" class="table table-striped table-bordered">
                         <thead class="text-center">
                             <tr>
                                 <th>S1</th>
@@ -49,10 +49,30 @@
                             @foreach ($allData as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}.</td>
+                                    <td>{{ $item->code }}</td>
+                                    <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $item->user->name }}</td>
+                                    <td>{{ $item->room->type->name }}</td>
+                                    <td><span class="badge bg-primary">{{ $item->check_in }}</span> / <br> <span
+                                            class="badge bg-warning text-dark">{{ $item->check_out }}</span></td>
+                                    <td>{{ $item->number_of_rooms }}</td>
+                                    <td>{{ $item->persion }}</td>
+                                    <td>
+                                        @if ($item->payment_status == '1')
+                                            <span class="text-success">Complete</span>
+                                        @else
+                                            <span class="text-danger">Pending</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->status == '1')
+                                            <span class="text-success">Active</span>
+                                        @else
+                                            <span class="text-danger">Pending</span>
+                                        @endif
+                                    </td>
 
                                     <td class="text-center">
-                                        <a href="{{ route('edit.team', $item->id) }}"
-                                            class="btn btn-outline-warning px-3 radius-30">Edit</a> &nbsp;
                                         <a href="{{ route('delete.team', $item->id) }}"
                                             class="btn btn-outline-danger px-3 radius-30" id="delete">Delete</a>
                                     </td>

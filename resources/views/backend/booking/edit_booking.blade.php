@@ -193,6 +193,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -240,8 +241,63 @@
                             </div>
                         </form>
                     </div>
+
+
+                    <div class="card-footer">
+                        <div class="card radius-10 w-100">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Customer Information</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <ul class="list-group list-group-flush">
+                                    <li
+                                        class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                                        Name <span
+                                            class="badge bg-warning text-dark rounded-pill">{{ $editData->user->name }}</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                        Email <span
+                                            class="badge bg-warning text-dark rounded-pill">{{ $editData->user->email }}</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                        Phone <span
+                                            class="badge bg-warning text-dark rounded-pill">{{ $editData->user->phone }}</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                        Country <span
+                                            class="badge bg-warning text-dark rounded-pill">{{ $editData->country }}</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                        State <span
+                                            class="badge bg-warning text-dark rounded-pill">{{ $editData->state }}</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                        Zip Code <span
+                                            class="badge bg-warning text-dark rounded-pill">{{ $editData->zip_code }}</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                        Address <span
+                                            class="badge bg-warning text-dark rounded-pill">{{ $editData->address }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
         </div><!--end row-->
 
     </div>

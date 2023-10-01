@@ -252,7 +252,7 @@ class BookingController extends Controller
     {
         $booking = Booking::find($booking_id);
 
-        $booking_date_array = RoomBookedDate::where('booking_id', $booking_id)->pluck('booking_date')->toArray();
+        $booking_date_array = RoomBookedDate::where('booking_id', $booking_id)->pluck('book_date')->toArray();
         $check_date_booking_ids = RoomBookedDate::whereIn('book_date', $booking_date_array)->where('room_id', $booking->rooms_id)->distinct()->pluck('booking_id')->toArray();
 
         $booking_ids = Booking::whereIn('id', $check_date_booking_ids)->pluck('id')->toArray();
@@ -262,5 +262,15 @@ class BookingController extends Controller
         $room_numbers = RoomNumber::where('rooms_id', $booking->rooms_id)->whereNotIn('id', $assign_room_ids)->where('status', 'Active')->get();
 
         return view('backend.booking.assign_room', compact('booking', 'room_numbers'));
+    }
+
+    public function assignRoomStore($booking_id, $room_number_id)
+    {
+        $booking = Booking::findOrFail($booking_id);
+        $check_data = BookingRoomList::where('booking_id', $booking_id)->count();
+
+        if ($check_data < $booking->number_of_rooms) {
+            # code...
+        }
     }
 }

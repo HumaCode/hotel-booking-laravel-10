@@ -243,4 +243,10 @@ class BookingController extends Controller
         );
         return redirect()->back()->with($notification);
     }
+
+
+
+    public function assignRoom()
+    {
+    }
 }

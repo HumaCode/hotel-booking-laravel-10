@@ -175,10 +175,19 @@ class BookingController extends Controller
         return redirect('/')->with($notification);
     }
 
+    // ----------------------------- Booking --------------------------------
+
     public function bookingList()
     {
         $allData = Booking::with('user', 'room')->orderBy('id', 'desc')->get();
 
         return view('backend.booking.booking_list', compact('allData'));
+    }
+
+    public function editBooking($id)
+    {
+        $editData = Booking::with('room')->findOrFail($id);
+
+        return view('backend.booking.edit_booking', compact('editData'));
     }
 }

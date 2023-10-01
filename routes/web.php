@@ -99,6 +99,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
     // admin booking route
     Route::controller(BookingController::class)->group(function () {
         Route::get('/booking/list', 'bookingList')->name('booking.list');
+        Route::get('/booking/edit/{id}', 'editBooking')->name('edit.booking');
     });
 });
 

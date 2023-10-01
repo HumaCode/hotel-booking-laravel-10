@@ -31,14 +31,14 @@ class FrontendController extends Controller
     {
         $request->flash();
 
-        // if ($request->check_in == $request->check_out) {
-        //     $notification = [
-        //         'message'       => 'Something went to wrong',
-        //         'alert-type'    => 'error'
-        //     ];
+        if ($request->check_in == $request->check_out) {
+            $notification = [
+                'message'       => 'Something went to wrong',
+                'alert-type'    => 'error'
+            ];
 
-        //     return redirect()->back()->with($notification);
-        // }
+            return redirect()->back()->with($notification);
+        }
 
         $sdate      = date('Y-m-d', strtotime($request->check_in));
         $edate      = date('Y-m-d', strtotime($request->check_out));

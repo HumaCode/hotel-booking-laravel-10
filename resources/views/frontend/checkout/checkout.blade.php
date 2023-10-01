@@ -22,7 +22,7 @@
     <section class="checkout-area pt-100 pb-70">
         <div class="container">
             <form method="POST" role="form" action="{{ route('checkout.store') }}" class="stripe_form require-validation"
-                data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}">
+                data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_SECRET') }}">
                 @csrf
 
                 <div class="row">
@@ -259,7 +259,7 @@
     </style>
 
 
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="https://js.stripe.com/v2/"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {

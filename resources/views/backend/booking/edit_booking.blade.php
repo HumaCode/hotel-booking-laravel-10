@@ -131,8 +131,68 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="col-md-6" style="float: right;">
+                                <style>
+                                    .test_table td {
+                                        text-align: right;
+                                        font-weight: bold;
+                                    }
+
+                                    .test_table .title-td {
+                                        text-align: start;
+                                        font-weight: bold;
+                                    }
+                                </style>
+                                <table class="table test_table" style="float: right;" border="none">
+                                    <tr>
+                                        <td class="title-td">Subtotal</td>
+                                        <td>${{ $editData->subtotal }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title-td">Discount</td>
+                                        <td>${{ $editData->discount }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title-td">Grand Total</td>
+                                        <td>${{ $editData->total_price }}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
 
+                        <form action="">
+                            <div class="row" style="margin-top: 40px">
+                                <div class="col-md-6">
+                                    <label for="" class="mb-2">Payment Status</label>
+                                    <select id="payment_status" name="payment_status" class="form-select">
+                                        <option disabled selected>Choose...</option>
+                                        <option value="0" {{ $editData->payment_status == '0' ? 'selected' : '' }}>
+                                            Pending
+                                        </option>
+                                        <option value="1" {{ $editData->payment_status == '1' ? 'selected' : '' }}>
+                                            Complete
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="" class="mb-2">Booking Status</label>
+                                    <select id="status" name="status" class="form-select">
+                                        <option disabled selected>Choose...</option>
+                                        <option value="0" {{ $editData->status == '0' ? 'selected' : '' }}>
+                                            Pending
+                                        </option>
+                                        <option value="1" {{ $editData->status == '1' ? 'selected' : '' }}>
+                                            Complete
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-primary" type="submit">UPDATE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

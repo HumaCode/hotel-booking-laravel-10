@@ -95,6 +95,7 @@ class BookingController extends Controller
         $total_price    = $subtotal - $discount;
         $code           = rand(000000000, 999999999);
 
+        // jika pembayaran menggunakan stripe
         if ($request->payment_method == 'Stripe') {
             Stripe::setApiKey(env('STRIPE_KEY'));
             $s_pay = Charge::create([
@@ -107,7 +108,7 @@ class BookingController extends Controller
 
             if ($s_pay['status'] == 'succeeded') {
                 $payment_status = 1;
-                $transation_id = $s_pay->id;
+                $transaction_id = $s_pay->id;
             } else {
 
                 $notification = array(
@@ -118,7 +119,7 @@ class BookingController extends Controller
             }
         } else {
             $payment_status = 0;
-            $transation_id = '';
+            $transaction_id = '';
         }
 
 
@@ -137,8 +138,8 @@ class BookingController extends Controller
         $data->discount             = $discount;
         $data->total_price          = $total_price;
         $data->payment_method       = $request->payment_method;
-        $data->transaction_id       = '';
-        $data->payment_status       = 0;
+        $data->transaction_id       = $transaction_id;
+        $data->payment_status       = $payment_status;
 
         $data->name                 = $request->name;
         $data->email                = $request->email;

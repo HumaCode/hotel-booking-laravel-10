@@ -202,47 +202,44 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <div>
-                                <h6 class="mb-0">Trending Products</h6>
-                            </div>
-                            <div class="dropdown ms-auto">
-                                <a class="dropdown-toggle dropdown-toggle-nocaret" href="#"
-                                    data-bs-toggle="dropdown"><i
-                                        class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                    </li>
-                                </ul>
+                                <h6 class="mb-0">Manage Room and Date</h6>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-container-2">
-                            <canvas id="chart2"></canvas>
-                        </div>
+                        <form action="">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="" class="mb-2">Check In</label>
+                                    <input type="date" required name="check_in" class="form-control"
+                                        value="{{ $editData->check_in }}">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="" class="mb-2">Check Out</label>
+                                    <input type="date" required name="check_out" class="form-control"
+                                        value="{{ $editData->check_out }}">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="" class="mb-2">Room</label>
+                                    <input type="number" min="0" required name="number_of_rooms"
+                                        class="form-control" value="{{ $editData->number_of_rooms }}">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="" class="mb-2">Availablity : <span
+                                            class="text-success availablity"></span></label>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-primary" type="submit">SUBMIT</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li
-                            class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                            Jeans <span class="badge bg-success rounded-pill">25</span>
-                        </li>
-                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                            T-Shirts <span class="badge bg-danger rounded-pill">10</span>
-                        </li>
-                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                            Shoes <span class="badge bg-primary rounded-pill">65</span>
-                        </li>
-                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                            Lingerie <span class="badge bg-warning text-dark rounded-pill">14</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div><!--end row-->

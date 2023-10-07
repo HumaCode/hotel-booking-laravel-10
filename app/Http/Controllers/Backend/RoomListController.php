@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\RoomNumber;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 
 class RoomListController extends Controller
@@ -32,5 +33,12 @@ class RoomListController extends Controller
             ->get();
 
         return view('backend.allroom.roomlist.view_room_list', compact('room_number_list'));
+    }
+
+    public function addRoomList()
+    {
+        $roomType = RoomType::all();
+
+        return view('backend.allroom.roomlist.add_roomlist', compact('roomType'));
     }
 }

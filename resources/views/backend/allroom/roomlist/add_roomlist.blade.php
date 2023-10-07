@@ -35,76 +35,85 @@
                             <option selected disabled>Select Room Type</option>
 
                             @foreach ($roomType as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->room->id }}">{{ $item->name }}</option>
                             @endforeach
 
                         </select>
                     </div>
+
                     <div class="col-md-4">
-                        <label for="input2" class="form-label">Check In</label>
-                        <input type="text" class="form-control" id="input2" placeholder="Last Name">
+                        <label for="check_in" class="form-label">Check In</label>
+                        <input type="date" class="form-control" id="check_in" name="check_in" placeholder="Check In">
                     </div>
+
                     <div class="col-md-4">
-                        <label for="input2" class="form-label">Check Out</label>
-                        <input type="text" class="form-control" id="input2" placeholder="Last Name">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="input3" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="input3" placeholder="Phone">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="input4" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="input4" placeholder="Email">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="input5" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="input5" placeholder="Password">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="input6" class="form-label">DOB</label>
-                        <input type="date" class="form-control" id="input6" placeholder="Date of Birth">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="input7" class="form-label">Country</label>
-                        <select id="input7" class="form-select">
-                            <option selected>Choose...</option>
-                            <option>One</option>
-                            <option>Two</option>
-                            <option>Three</option>
-                        </select>
+                        <label for="check_out" class="form-label">Check Out</label>
+                        <input type="date" class="form-control" id="check_out" name="check_out" placeholder="Check Out">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="input8" class="form-label">City</label>
-                        <input type="text" class="form-control" id="input8" placeholder="City">
+                        <label for="number_of_rooms" class="form-label">Room</label>
+                        <input type="number" min="0" class="form-control" id="number_of_rooms"
+                            name="number_of_rooms" placeholder="Room">
+
+                        <input type="hidden" name="available_room">
+                        <label for="" class="mt-2">Availability <span
+                                class="text-success availability"></span></label>
                     </div>
+
+                    <div class="col-md-6">
+                        <label for="number_of_person" class="form-label">Guest</label>
+                        <input type="number" class="form-control" id="number_of_person" name="number_of_person"
+                            placeholder="Guest">
+                    </div>
+
+                    <hr>
+                    <h3 class="mt-3 mb-5 text-center">Customer Information</h3>
+
                     <div class="col-md-4">
-                        <label for="input9" class="form-label">State</label>
-                        <select id="input9" class="form-select">
-                            <option selected>Choose...</option>
-                            <option>One</option>
-                            <option>Two</option>
-                            <option>Three</option>
-                        </select>
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                            value="{{ old('name') }}">
                     </div>
-                    <div class="col-md-2">
-                        <label for="input10" class="form-label">Zip</label>
-                        <input type="text" class="form-control" id="input10" placeholder="Zip">
+
+                    <div class="col-md-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            value="{{ old('email') }}">
                     </div>
+
+                    <div class="col-md-4">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="number" min="0" class="form-control" id="phone" name="phone"
+                            value="{{ old('phone') }}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" class="form-control" id="country" name="name"
+                            value="{{ old('country') }}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="zip_code" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" id="zip_code" name="zip_code"
+                            value="{{ old('zip_code') }}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text"class="form-control" id="state" name="state"
+                            value="{{ old('state') }}">
+                    </div>
+
                     <div class="col-md-12">
-                        <label for="input11" class="form-label">Address</label>
-                        <textarea class="form-control" id="input11" placeholder="Address ..." rows="3"></textarea>
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" name="address" placeholder="Address ..." rows="3">{{ old('address') }}</textarea>
                     </div>
+
                     <div class="col-md-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="input12">
-                            <label class="form-check-label" for="input12">Check me out</label>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="d-md-flex d-grid align-items-center gap-3">
-                            <button type="button" class="btn btn-primary px-4">Submit</button>
-                            <button type="button" class="btn btn-light px-4">Reset</button>
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-primary">SUBMIT</button>
                         </div>
                     </div>
                 </form>

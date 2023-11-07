@@ -30,12 +30,14 @@
 
                 <form class="row g-3">
                     <div class="col-md-4">
-                        <label for="room_type" class="form-label">Room Type</label>
-                        <select id="room_type" name="room_type" class="form-select">
-                            <option selected disabled>Select Room Type</option>
+                        <label for="roomtype_id" class="form-label">Room Type</label>
+                        <select id="room_id" name="room_id" class="form-select">
+                            <option>Select Room Type</option>
 
                             @foreach ($roomType as $item)
-                                <option value="{{ $item->room->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->room->id }}"
+                                    {{ collect(old('roomtype_id'))->contains($item->id) ? 'selected' : '' }}>
+                                    {{ $item->name }}</option>
                             @endforeach
 
                         </select>
@@ -56,7 +58,7 @@
                         <input type="number" min="0" class="form-control" id="number_of_rooms"
                             name="number_of_rooms" placeholder="Room">
 
-                        <input type="hidden" name="available_room">
+                        <input type="hidden" name="available_room" id="available_room">
                         <label for="" class="mt-2">Availability <span
                                 class="text-success availability"></span></label>
                     </div>
@@ -126,55 +128,42 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#image').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0'])
+            $("#room_id").on('change', function() {
+                $("#check_in").val('');
+                $("#check_out").val('');
+                $(".availability").text(0);
+                $("#available_room").val(0);
+            });
+            $("#check_out").on('change', function() {
+                getAvaility();
             });
         });
-    </script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#myForm').validate({
-                rules: {
-                    name: {
-                        required: true,
+        function getAvaility() {
+            var check_in = $('#check_in').val();
+            var check_out = $('#check_out').val();
+            var room_id = $("#room_id").val();
+            var startDate = new Date(check_in);
+            var endDate = new Date(check_out);
+            if (startDate > endDate) {
+                alert('Invalid Date');
+                $("#check_out").val('');
+                return false;
+            }
+            if (check_in != '' && check_out != '' && room_id != '') {
+                $.ajax({
+                    url: "{{ route('check_room_availability') }}",
+                    data: {
+                        room_id: room_id,
+                        check_in: check_in,
+                        check_out: check_out
                     },
-                    position: {
-                        required: true,
-                    },
-                    image: {
-                        required: true,
+                    success: function(data) {
+                        $(".availability").text(data['available_room']);
+                        $("#available_room").val(data['available_room']);
                     }
-
-                },
-                messages: {
-                    name: {
-                        required: 'Please Enter Team Name',
-                    },
-                    position: {
-                        required: 'Please Enter Position',
-                    },
-                    image: {
-                        required: 'Please Input Image',
-                    },
-
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                },
-            });
-        });
+                });
+            }
+        }
     </script>
 @endpush

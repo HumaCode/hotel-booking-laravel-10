@@ -86,6 +86,7 @@
                                                 alt="Main Image" class="p-1 bg-primary mt-2" width="110" height="120"
                                                 id="showImage">
                                         </div>
+
                                         <div class="col-md-6">
                                             <label for="multiImg" class="form-label">Galery Image</label>
                                             <input type="file" name="multi_img[]" multiple class="form-control"

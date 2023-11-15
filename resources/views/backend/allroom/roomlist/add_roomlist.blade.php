@@ -28,7 +28,9 @@
         <div class="card">
             <div class="card-body p-4">
 
-                <form class="row g-3">
+                <form action="{{ route('store.roomlist') }}" method="POST" class="row g-3">
+                    @csrf
+
                     <div class="col-md-4">
                         <label for="roomtype_id" class="form-label">Room Type</label>
                         <select id="room_id" name="room_id" class="form-select">
@@ -92,7 +94,7 @@
 
                     <div class="col-md-4">
                         <label for="country" class="form-label">Country</label>
-                        <input type="text" class="form-control" id="country" name="name"
+                        <input type="text" class="form-control" id="country" name="country"
                             value="{{ old('country') }}">
                     </div>
 
@@ -115,7 +117,7 @@
 
                     <div class="col-md-12">
                         <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-primary">SUBMIT</button>
+                            <button type="submit" class="btn btn-primary">SUBMIT</button>
                         </div>
                     </div>
                 </form>

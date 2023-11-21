@@ -227,9 +227,16 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-12 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-primary" type="submit">UPDATE</button>
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-3">
+                                    <div class="d-grid gap-2">
+                                        <a href="{{ route('download.invoice', $editData->id) }}" class="btn btn-warning"><i
+                                                class="lni lni-download"></i>Download
+                                            Invoice</a>
                                     </div>
                                 </div>
                             </div>

@@ -308,7 +308,7 @@ class BookingController extends Controller
 
     public function downloadInvoice($id)
     {
-        $editData = Booking::with('room')->find($id); 
+        $editData = Booking::with('room')->find($id);
 
         $pdf = Pdf::loadView('backend.booking.booking_invoice', compact('editData'))->setPaper('a4')->setOption([
             'tempDir' => public_path(),
@@ -316,5 +316,13 @@ class BookingController extends Controller
         ]);
 
         return $pdf->download('invoice.pdf');
+    }
+
+    public function userBooking()
+    {
+        $id = Auth::user()->id;
+        $allData = Booking::where('user_id', $id)->orderBy('id', 'desc')->get();
+
+        return view('frontend.dashboard.user_booking', compact('allData'));
     }
 }

@@ -205,7 +205,7 @@ class BookingController extends Controller
         $booking->save();
 
         // send mail
-        $sendMail = Booking::fins($id);
+        $sendMail = Booking::find($id);
 
         $data = [
             'check_in'  => $sendMail->check_in,

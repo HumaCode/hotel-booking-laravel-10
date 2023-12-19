@@ -115,6 +115,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
     // room list route
     Route::controller(SettingController::class)->group(function () {
         Route::get('/smtp/setting', 'smtpSetting')->name('smtp.setting');
+        Route::post('/smtp/update', 'smtpUpdate')->name('smtp.update');
        
     });
 });
